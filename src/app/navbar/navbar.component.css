@@ -1,0 +1,5 @@
+nav.navbar.navbar-expand-lg{
+    border-bottom: 2px solid slategray !important;
+    box-shadow: 5px 5px 10px slategray;
+    /* width: 75%; */
+}
