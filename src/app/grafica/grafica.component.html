@@ -1,0 +1,38 @@
+<div class="row bg-light py-5 m-0 mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-5 animate__animated animate__fadeIn animate__delay-1s">Estadisticas de ventas</h2>
+        <div class="row">
+            <div class="col-8 px-5">
+              <div style="display: block">
+                <canvas baseChart
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+                </canvas>
+                <!-- [plugins]="barChartPlugins" -->
+              </div>
+            </div>
+            <div class="col-4 d-flex align-items-center px-5 border-left">
+              <table class="table table-hover rounded">
+                <thead class="thead-dark">
+                  <tr>
+                    <th class="font-weight-bold text-center">#</th>
+                    <th class="font-weight-bold text-center">Nombre</th>
+                    <th class="font-weight-bold text-center">Ventas</th>
+                  </tr>
+                </thead>
+                
+                <tbody *ngFor="let item of datos">
+                  <tr>
+                    <th scope="row" class="text-center">{{item.name.split(" ")[1]}}</th>
+                    <td class="text-center"><img src="./../../assets/images/tienda.png" alt=""> {{item.name}}</td>
+                    <td class="text-center"><span class="font-weight-bold">$</span> {{item.sales}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+    </div>
+</div>

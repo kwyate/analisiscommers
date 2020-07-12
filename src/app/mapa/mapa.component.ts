@@ -54,7 +54,6 @@ export class MapaComponent implements OnInit {
                         "features": this.datos
                     }
                 });
-                console.log("add source", this.mapa.getSource("tienda"));
                     this.mapa.addLayer({
                         'id': 'tienda',
                         'type': 'circle',
