@@ -24,14 +24,13 @@ export class MapaComponent implements OnInit {
             this.mapa = new Mapboxgl.Map({
                 container: 'mapa-mapbox',
                 style: 'mapbox://styles/mapbox/streets-v11',
-                center: { lng: -74.1709688, lat: 4.584694 },
-                zoom: 15
+                center: { lng: -74.08699035644531, lat: 4.742043976363009 },
+                zoom: 10
             });
             this.mapa.addControl(new Mapboxgl.NavigationControl());
             this.loadSource();
-            this.cardLoadInformation();
-            this.forEachLayer();
-            this.crearMarcador(-74.1709688, 4.584694);
+            this.eventMap();
+            this.crearMarcador(-74.08699035644531, 4.742043976363009);
         },100);
         
     }
@@ -66,41 +65,7 @@ export class MapaComponent implements OnInit {
                     });
             });
     }
-    forEachLayer() {
-        // // enumerate ids of the layers
-        var toggleableLayerIds = ['tienda'];
-
-        // // set up the corresponding toggle button for each layer
-        for (var i = 0; i < toggleableLayerIds.length; i++) {
-            var id = toggleableLayerIds[i];
-
-            var link = document.createElement('a');
-            link.href = '#';
-            link.className = 'active';
-            link.textContent = id;
-
-            link.onclick = (e) => {
-                var clickedLayer = link.textContent;
-                e.preventDefault();
-                e.stopPropagation();
-
-                var visibility = this.mapa.getLayoutProperty(clickedLayer, 'visibility');
-
-                // toggle layer visibility by changing the layout object's visibility property
-                if (visibility === 'visible') {
-                    this.mapa.setLayoutProperty(clickedLayer, 'visibility', 'none');
-                    link.className = '';
-                } else {
-                    link.className = 'active';
-                    this.mapa.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-                }
-            };
-        }
-        var layers = document.getElementById('menu');
-        layers.appendChild(link);
-
-    }
-    cardLoadInformation() {
+    eventMap() {
 
         this.mapa.on("load", () => {
 
@@ -121,7 +86,9 @@ export class MapaComponent implements OnInit {
             localStorage.setItem("datosComerciante", JSON.stringify(point.features[0].properties));
         });
         this.informacionComercio = JSON.parse(localStorage.getItem("datosComerciante"));
-        
+        setTimeout(()=>{
+            localStorage.removeItem("datosComerciante");
+        }, 100);
     }
     crearMarcador(lng: number, lat: number) {
         const marker = new Mapboxgl.Marker({

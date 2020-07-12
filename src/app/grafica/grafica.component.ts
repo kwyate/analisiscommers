@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-// import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import {SalesService} from './../services/sales.service';
 
@@ -14,7 +13,6 @@ export class GraficaComponent implements OnInit {
   datos;
   public barChartOptions: ChartOptions = {
     responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
     scales: { xAxes: [{}], yAxes: [{}] },
     plugins: {
       datalabels: {
@@ -26,9 +24,11 @@ export class GraficaComponent implements OnInit {
   public barChartLabels: Label[];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
-  // public barChartPlugins = [pluginDataLabels];
   public barChartData: ChartDataSets[];
-  constructor(private salesService: SalesService) { }
+  constructor(private salesService: SalesService) { 
+
+    
+  }
 
   ngOnInit(): void {
     this.getSalesAll();
@@ -56,18 +56,7 @@ export class GraficaComponent implements OnInit {
       localStorage.setItem("sales", JSON.stringify(sales));
     })
     this.datos = JSON.parse(localStorage.getItem("sales"));
-    setTimeout(()=>{
-      localStorage.removeItem("sales");
-    },100);
-    console.log(this.datos);
-    
-  }
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    setTimeout(()=>{localStorage.removeItem("sales");},100); 
   }
 
   

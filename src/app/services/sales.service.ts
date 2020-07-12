@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import{ Sales } from './../interfaces/sales';
+import {environment} from './../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +11,6 @@ export class SalesService {
 
 
   getSales(){
-    const path = 'https://alw-lab.herokuapp.com/commerces/graph';
-    return this.http.get<Sales[]>(path);
+    return this.http.get<Sales[]>(environment.pathSales);
   }
 }

@@ -4,3 +4,16 @@
     display: inline-block;
     border-radius: 5px;
 }
+.box-content{
+    height: calc(100vh - 56px);
+}
+@media screen and (max-width: 988px){
+    .box-content{
+        height: auto;
+    }
+    #mapa-mapbox{
+        display: block;
+        height: 400px;
+        margin-bottom:20px;
+    }
+}

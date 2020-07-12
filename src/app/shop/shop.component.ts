@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {ShopService} from './../services/shop.service';
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopComponent implements OnInit {
 
-  constructor() { }
+  datos;
+  constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
+    this.getAllCommerce();
+  }
+  getAllCommerce(){   
+    this.shopService.getAllCommerce().subscribe(commerce => {
+      localStorage.setItem("commerce", JSON.stringify(commerce));
+    });
+    this.datos = JSON.parse(localStorage.getItem("commerce"));
+    setTimeout(()=>{localStorage.removeItem("commerce");}, 100);
+
   }
 
 }

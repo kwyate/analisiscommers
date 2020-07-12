@@ -12,13 +12,9 @@ export class AppComponent implements OnInit{
     @Output() infocardEvent: EventEmitter<object> = new EventEmitter;
 
     
-    title = 'prueba-analitycs';
+    title = 'App analisis comerciantes';
 
-
-    
-    ngOnInit() {
-
-        
+    ngOnInit() { 
     }
     
     
