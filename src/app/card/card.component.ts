@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
+  // variable que recibe valores del componente padre MapaComponent
   @Input() fitgureInfo: any;
 
   constructor() { 

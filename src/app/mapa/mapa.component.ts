@@ -8,10 +8,13 @@ import {MapService} from './../services/map.service';
     templateUrl: './mapa.component.html',
     styleUrls: ['./mapa.component.css']
 })
+// En este componente se implementa la API mapbox
 export class MapaComponent implements OnInit {
-
+    // Se inicializa una variable de tipo mapbox
     mapa: Mapboxgl.Map;
+    // Variable que pasara informacion al compónente hijo cardComponent
     informacionComercio: any = {address: "",days: "",id: 6,name: "",nit: "",owner: "", phone: "", sales: "", schedule: ""};
+    //variable almacenara los datos del web services
     datos;
     constructor(private mapService:MapService) { 
     }
@@ -34,6 +37,7 @@ export class MapaComponent implements OnInit {
         },100);
         
     }
+    // Este metodo asignara a this.datos la data del web service
     getFeaturesCollection() {
         
         this.mapService.getFeaturesCollection().subscribe(features=>{ 
@@ -43,6 +47,7 @@ export class MapaComponent implements OnInit {
         setTimeout(()=>{localStorage.removeItem("datosFeatures");},100);
 
     }
+    // Metodo que cargara los sources del mapa en este caso se le pasara la data obtenida en this.getFeatureCollection()
     loadSource() {
             this.mapa.on('load', () => {
                 // add source and layer for museums
@@ -65,6 +70,7 @@ export class MapaComponent implements OnInit {
                     });
             });
     }
+    // Separacion de eventos de mouse 
     eventMap() {
 
         this.mapa.on("load", () => {
@@ -80,8 +86,8 @@ export class MapaComponent implements OnInit {
             });
         })
     }
+    // Enviar los datos al componente hijo CardComponente del comercio clickeado en el mapa y renderizarlos en la tarjeta
     obtenerInformation(){
-        
         this.mapa.on('click', 'tienda', (point)=>{
             localStorage.setItem("datosComerciante", JSON.stringify(point.features[0].properties));
         });
@@ -90,6 +96,7 @@ export class MapaComponent implements OnInit {
             localStorage.removeItem("datosComerciante");
         }, 100);
     }
+    // Se crea un marcadar draggable
     crearMarcador(lng: number, lat: number) {
         const marker = new Mapboxgl.Marker({
             draggable: true

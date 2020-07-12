@@ -10,6 +10,7 @@ export class MapService {
 
   constructor(private http: HttpClient) { }
 
+  // Se recibe los datos de GET /commerces/layer para poder imprimir las cordenadas en el mapa
   getFeaturesCollection(){
     return this.http.get<Mapa[]>(environment.pathLayer);
   }

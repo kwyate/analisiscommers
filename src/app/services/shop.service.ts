@@ -10,7 +10,7 @@ export class ShopService {
   constructor(private http: HttpClient) { 
 
   }
-
+  //se reciben datos de GET /commerces/graph para poder graficar los datos de ventas de cada comercio
   getAllCommerce(){
     return this.http.get<Shop>(environment.pathCommerce);
   }
